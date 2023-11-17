@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   Box,
   Button,
@@ -21,7 +21,7 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { resetPassword } from "api/forgotPassword";
 
-export default function ResetPassword({username}) {
+export default function ResetPassword({ username }) {
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
@@ -39,14 +39,12 @@ export default function ResetPassword({username}) {
   );
   const [token, setToken] = useState("");
   const [loading, setLoading] = useState(false);
-  const [password, setPassword] = useState('')
-  const [show, setShow] = useState(false)
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [show1, setShow1] = useState(false);
+  const [show2, setShow2] = useState(false);
 
-  const handleClick = (e)=>{
-    setShow(!show)
-  }
-  const showToast = (msg) =>{
-  
+  const showToast = (msg) => {
     toast.error(`${msg}`, {
       position: "top-center",
       autoClose: 5000,
@@ -56,20 +54,19 @@ export default function ResetPassword({username}) {
       draggable: true,
       progress: 0,
       theme: "light",
-      });
-  }
+    });
+  };
   const handleResetPassword = async () => {
     let res;
     try {
-      setLoading(true)
-      const res = await resetPassword(username,token,password,password);
+      setLoading(true);
+      const res = await resetPassword(username, token, password1, password2);
       console.log(res);
       setLoading(false);
-      if(res.message == "success"){
-       window.location.href = '/';
-      }
-      else{
-      throw {message:res.message};
+      if (res.message == "success") {
+        window.location.href = "/";
+      } else {
+        throw { message: res.message };
       }
     } catch (error) {
       showToast(error.message);
@@ -141,34 +138,65 @@ export default function ResetPassword({username}) {
             onChange={(e) => setToken(e.target.value)}
           />
           <FormLabel
-              ms='4px'
-              fontSize='sm'
-              fontWeight='500'
-              color={textColor}
-              display='flex'>
-              Password<Text color={brandStars}>*</Text>
-            </FormLabel>
-        <InputGroup size='md'>
-              <Input
-                isRequired={true}
-                fontSize='sm'
-                placeholder='Min. 8 characters'
-                mb='24px'
-                size='lg'
-                type={show ? "text" : "password"}
-                variant='auth'
-                value={password}
-                onChange={e => setPassword(e.target.value)}
+            ms="4px"
+            fontSize="sm"
+            fontWeight="500"
+            color={textColor}
+            display="flex"
+          >
+            Password<Text color={brandStars}>*</Text>
+          </FormLabel>
+          <InputGroup size="md">
+            <Input
+              isRequired={true}
+              fontSize="sm"
+              placeholder="Min. 8 characters"
+              mb="24px"
+              size="lg"
+              type={show1 ? "text" : "password"}
+              variant="auth"
+              value={password1}
+              onChange={(e) => setPassword1(e.target.value)}
+            />
+            <InputRightElement display="flex" alignItems="center" mt="4px">
+              <Icon
+                color={textColorSecondary}
+                _hover={{ cursor: "pointer" }}
+                as={show1 ? RiEyeCloseLine : MdOutlineRemoveRedEye}
+                onClick={() => setShow1(!show1)}
               />
-              <InputRightElement display='flex' alignItems='center' mt='4px'>
-                <Icon
-                  color={textColorSecondary}
-                  _hover={{ cursor: "pointer" }}
-                  as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
-                  onClick={handleClick}
-                />
-              </InputRightElement>
-            </InputGroup>
+            </InputRightElement>
+          </InputGroup>
+          <FormLabel
+            ms="4px"
+            fontSize="sm"
+            fontWeight="500"
+            color={textColor}
+            display="flex"
+          >
+            Confirm Password<Text color={brandStars}>*</Text>
+          </FormLabel>
+          <InputGroup size="md">
+            <Input
+              isRequired={true}
+              fontSize="sm"
+              placeholder="Min. 8 characters"
+              mb="24px"
+              size="lg"
+              type={show2 ? "text" : "password"}
+              variant="auth"
+              value={password2}
+              onChange={(e) => setPassword2(e.target.value)}
+            />
+            <InputRightElement display="flex" alignItems="center" mt="4px">
+              <Icon
+                color={textColorSecondary}
+                _hover={{ cursor: "pointer" }}
+                as={show2 ? RiEyeCloseLine : MdOutlineRemoveRedEye}
+                onClick={() => setShow2(!show2)}
+              />
+            </InputRightElement>
+          </InputGroup>
           <Flex justifyContent="space-between" align="center" mb="24px">
             <FormControl display="flex" alignItems="center">
               <FormLabel
@@ -195,17 +223,17 @@ export default function ResetPassword({username}) {
           </Flex>
         </FormControl>
         <ToastContainer
-              position="top-center"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="light"
-          />
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </Flex>
     </Flex>
   );

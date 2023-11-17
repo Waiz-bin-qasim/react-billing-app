@@ -13,9 +13,9 @@ export function SidebarBrand() {
   let logoColor = useColorModeValue("navy.700", "white");
 
   return (
-    <Flex align="center" direction="column" mt={"8"}>
-      <Flex align="center" direction="row" mb={"4"}>
-        {/* <Image src={eocean} h="50px" w="50px" my="32px" /> */}
+    <Flex align="center" direction="column">
+      <Flex align="center" direction="row">
+        <Image src={eocean} h="50px" w="50px" my="32px" />
         <Text mx={"8px"} fontWeight={"bold"}>
           Digital Connect Billing
         </Text>
