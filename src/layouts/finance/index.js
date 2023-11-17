@@ -167,11 +167,7 @@ export default function Dashboard(props) {
               >
                 <Switch>
                   {getRoutes(routes)}
-                  {getToken() ? (
-                    <Redirect from="/" to="/finance/finance-reports" />
-                  ) : (
-                    <Redirect from="/" to="/auth" />
-                  )}
+                  {/* <Redirect from="/" to="/finance/finance-reports" /> */}
                 </Switch>
               </Box>
             ) : null}

@@ -24,20 +24,20 @@ ReactDOM.render(
             {!getToken() && (
               <>
                 {" "}
-                <Route path={`/auth`} component={AuthLayout} />
+                <Route path={`/`} component={AuthLayout} />
                 <Redirect from="/" to="/auth/sign-in" />
               </>
             )}
             {getToken() && role === "Admin" && (
               <>
-                <Route path={`/admin`} component={AdminLayout} />
-                <Redirect from="/" to="/admin" />
+                <Route path={`/`} component={AdminLayout} />
+                <Redirect from="/" to="/admin/default" />
               </>
             )}
             {getToken() && role === "Finance" && (
               <>
-                <Route path={`/finance`} component={financeLayout} />
-                <Redirect from="/" to="/finance" />
+                <Route path={`/`} component={financeLayout} />
+                <Redirect from="/" to="/finance/finance-reports" />
               </>
             )}
           </Switch>

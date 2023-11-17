@@ -172,14 +172,7 @@ export default function Dashboard(props) {
                 minH="100vh"
                 pt="50px"
               >
-                <Switch>
-                  {getRoutes(routes)}
-                  {getToken() ? (
-                    <Redirect from="/" to="/admin/default" />
-                  ) : (
-                    <Redirect from="/" to="/auth" />
-                  )}
-                </Switch>
+                <Switch>{getRoutes(routes)}</Switch>
               </Box>
             ) : null}
             <Box>

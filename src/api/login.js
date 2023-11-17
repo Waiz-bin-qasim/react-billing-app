@@ -20,7 +20,7 @@ export const login = async (username, password) => {
       localStorage.setItem("roleName", data.roleName);
       localStorage.setItem("user", data.user);
       document.cookie = `token=${data.token}; expires=${expires}; path=/; `;
-      return (window.location.href = "/admin/default");
+      return (window.location.href = "/");
     } else {
       throw {
         message: "Incorrect Credentials",
